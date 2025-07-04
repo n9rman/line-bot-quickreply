@@ -114,14 +114,14 @@ function createBubble(imgUrl, title, desc) {
               type: 'text',
               text: title,
               size: 'xl',
-              color: '#000000',
+              color: '#ff00d6',
               weight: 'bold'
             },
             {
               type: 'text',
               text: desc,
               wrap: true,
-              color: '#000000',
+              color: '#ff00d6',
               size: 'xxs',
               margin: 'xs'
             },
@@ -142,7 +142,7 @@ function createBubble(imgUrl, title, desc) {
                     {
                       type: 'text',
                       text: '點我看完整髮型',
-                      color: '#ffffff',
+                      color: '#000000',
                       flex: 0,
                       offsetTop: '-2px'
                     },
@@ -155,7 +155,7 @@ function createBubble(imgUrl, title, desc) {
               borderWidth: '1px',
               cornerRadius: '4px',
               spacing: 'sm',
-              borderColor: '#FFFFFF',
+              borderColor: '#000000',
               margin: 'xxl',
               height: '40px',
               action: {

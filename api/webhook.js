@@ -10,7 +10,6 @@ const config = {
 const client = new line.Client(config);
 app.use(express.json());
 
-// webhook endpoint
 app.post('/api/webhook', (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
@@ -21,16 +20,13 @@ app.post('/api/webhook', (req, res) => {
     });
 });
 
-// 主邏輯
 function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null);
   }
 
-  const msg = event.message.text;
-
-  // ➤ Quick Reply：「我要預約」
-  if (msg === '我要預約') {
+  // 👉 Quick Reply：「我要預約」
+  if (event.message.text === '我要預約') {
     return client.replyMessage(event.replyToken, {
       type: 'text',
       text: '請選擇服務項目：',
@@ -57,215 +53,121 @@ function handleEvent(event) {
     });
   }
 
-  // ➤ Flex Message：「髮型介紹」
-  if (msg === '髮型介紹') {
-    const bubbles = [
-      {
-        type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://developers-resource.landpress.line.me/fx/clip/clip1.jpg",
-          size: "full",
-          aspectRatio: "2:3",
-          aspectMode: "cover"
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: "蘋果頭 x 蜂蜜奶香",
-              size: "lg",
-              weight: "bold",
-              wrap: true
-            },
-            {
-              type: "text",
-              text: "柔順圓潤，像一杯剛打開的蜂蜜牛奶",
-              size: "sm",
-              wrap: true,
-              color: "#888888",
-              margin: "md"
-            }
-          ]
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "button",
-              style: "link",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "看更多髮型",
-                uri: "https://www.instagram.com/airhair.official/"
-              }
-            }
-          ]
-        }
-      },
-      {
-        type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://developers-resource.landpress.line.me/fx/clip/clip2.jpg",
-          size: "full",
-          aspectRatio: "2:3",
-          aspectMode: "cover"
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: "俐落層次短髮",
-              size: "lg",
-              weight: "bold",
-              wrap: true
-            },
-            {
-              type: "text",
-              text: "輕盈剪裁，凸顯臉部線條，超好整理！",
-              size: "sm",
-              wrap: true,
-              color: "#888888",
-              margin: "md"
-            }
-          ]
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "button",
-              style: "link",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "看更多髮型",
-                uri: "https://www.instagram.com/airhair.official/"
-              }
-            }
-          ]
-        }
-      },
-      {
-        type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://developers-resource.landpress.line.me/fx/clip/clip3.jpg",
-          size: "full",
-          aspectRatio: "2:3",
-          aspectMode: "cover"
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: "氣質鎖骨髮",
-              size: "lg",
-              weight: "bold",
-              wrap: true
-            },
-            {
-              type: "text",
-              text: "不挑臉型、自然捲也OK，約會最加分！",
-              size: "sm",
-              wrap: true,
-              color: "#888888",
-              margin: "md"
-            }
-          ]
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "button",
-              style: "link",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "看更多髮型",
-                uri: "https://www.instagram.com/airhair.official/"
-              }
-            }
-          ]
-        }
-      },
-      {
-        type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://developers-resource.landpress.line.me/fx/clip/clip4.jpg",
-          size: "full",
-          aspectRatio: "2:3",
-          aspectMode: "cover"
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: "韓系空氣瀏海",
-              size: "lg",
-              weight: "bold",
-              wrap: true
-            },
-            {
-              type: "text",
-              text: "減齡必備、修飾額頭，拍照必勝角度",
-              size: "sm",
-              wrap: true,
-              color: "#888888",
-              margin: "md"
-            }
-          ]
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "button",
-              style: "link",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "看更多髮型",
-                uri: "https://www.instagram.com/airhair.official/"
-              }
-            }
-          ]
-        }
-      }
-    ];
-
+  // 👉 Flex Message：「髮型介紹」
+  if (event.message.text === '髮型介紹') {
     return client.replyMessage(event.replyToken, {
       type: 'flex',
       altText: '髮型介紹卡片',
-      contents: {
-        type: 'carousel',
-        contents: bubbles
-      }
+      contents: carouselMessage
     });
   }
 
-  // // ➤ fallback：未匹配指令
-  // return client.replyMessage(event.replyToken, {
-  //   type: 'text',
-  //   text: '請輸入「我要預約」或「髮型介紹」來開始',
-  // });
 }
 
-// 匯出 app
+// 👉 Flex Message：Carousel with 4 Bubbles
+const carouselMessage = {
+  type: 'carousel',
+  contents: [
+    createBubble(
+      'https://developers-resource.landpress.line.me/fx/clip/clip1.jpg',
+      '蘋果頭 x 蜂蜜奶香',
+      '像一杯剛打開的蜂蜜牛奶， 軟軟的甜，沒有壓力，也不膩。 剪短之後反而更溫柔， 像靠近妳時，剛好聞到的那一點點甜。'
+    ),
+    createBubble(
+      'https://developers-resource.landpress.line.me/fx/clip/clip2.jpg',
+      '俐落層次短髮',
+      '輕盈剪裁，凸顯臉部線條， 超好整理又不顯年紀。'
+    ),
+    createBubble(
+      'https://developers-resource.landpress.line.me/fx/clip/clip3.jpg',
+      '氣質鎖骨髮',
+      '不挑臉型、自然捲也OK，氣質與甜美兼具，男女都愛！'
+    ),
+    createBubble(
+      'https://developers-resource.landpress.line.me/fx/clip/clip4.jpg',
+      '韓系空氣瀏海',
+      '減齡神器，修飾額頭，自然蓬鬆、拍照超加分～'
+    )
+  ]
+};
+
+function createBubble(imgUrl, title, desc) {
+  return {
+    type: 'bubble',
+    body: {
+      type: 'box',
+      layout: 'vertical',
+      contents: [
+        {
+          type: 'image',
+          url: imgUrl,
+          size: 'full',
+          aspectRatio: '2:3',
+          gravity: 'top',
+          aspectMode: 'cover'
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: title,
+              size: 'xl',
+              color: '#ffffff',
+              weight: 'bold'
+            },
+            {
+              type: 'text',
+              text: desc,
+              wrap: true,
+              color: '#FFFFFF',
+              size: 'xxs',
+              margin: 'xs'
+            },
+            {
+              type: 'button',
+              action: {
+                type: 'uri',
+                label: '🛒 點我看完整髮型',
+                uri: 'https://www.instagram.com/airhair.official/'
+              },
+              style: 'link',
+              margin: 'lg'
+            }
+          ],
+          position: 'absolute',
+          offsetBottom: '0px',
+          offsetStart: '0px',
+          offsetEnd: '0px',
+          paddingAll: '20px',
+          paddingTop: '18px'
+        },
+        {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: 'HOT',
+              color: '#ffffff',
+              align: 'center',
+              size: 'xs',
+              offsetTop: '3px'
+            }
+          ],
+          position: 'absolute',
+          cornerRadius: '20px',
+          offsetTop: '18px',
+          backgroundColor: '#ff334b',
+          offsetStart: '18px',
+          height: '25px',
+          width: '53px'
+        }
+      ],
+      paddingAll: '0px'
+    }
+  };
+}
+
 module.exports = app;

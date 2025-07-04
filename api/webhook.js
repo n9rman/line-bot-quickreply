@@ -126,14 +126,43 @@ function createBubble(imgUrl, title, desc) {
               margin: 'xs'
             },
             {
-              type: 'button',
+              type: 'box',
+              layout: 'vertical',
+              contents: [
+                { type: 'filler' },
+                {
+                  type: 'box',
+                  layout: 'baseline',
+                  contents: [
+                    { type: 'filler' },
+                    {
+                      type: 'icon',
+                      url: 'https://developers-resource.landpress.line.me/fx/clip/clip14.png'
+                    },
+                    {
+                      type: 'text',
+                      text: '點我看完整髮型',
+                      color: '#ffffff',
+                      flex: 0,
+                      offsetTop: '-2px'
+                    },
+                    { type: 'filler' }
+                  ],
+                  spacing: 'sm'
+                },
+                { type: 'filler' }
+              ],
+              borderWidth: '1px',
+              cornerRadius: '4px',
+              spacing: 'sm',
+              borderColor: '#ffffff',
+              margin: 'xxl',
+              height: '40px',
               action: {
                 type: 'uri',
-                label: '🛒 點我看完整髮型',
+                label: '點我看完整髮型',
                 uri: 'https://www.instagram.com/airhair.official/'
-              },
-              style: 'link',
-              margin: 'lg'
+              }
             }
           ],
           position: 'absolute',
@@ -169,5 +198,6 @@ function createBubble(imgUrl, title, desc) {
     }
   };
 }
+
 
 module.exports = app;

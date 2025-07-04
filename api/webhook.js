@@ -69,24 +69,24 @@ const carouselMessage = {
   type: 'carousel',
   contents: [
     createBubble(
-      'https://developers-resource.landpress.line.me/fx/clip/clip1.jpg',
+      'https://line-bot-quickreply.vercel.app/images/1.png',
       '蘋果頭 x 蜂蜜奶香',
-      '像一杯剛打開的蜂蜜牛奶， 軟軟的甜，沒有壓力，也不膩。 剪短之後反而更溫柔， 像靠近妳時，剛好聞到的那一點點甜。'
+      '像一杯剛打開的蜂蜜牛奶，軟軟的甜，沒有壓力，也不膩。剪短之後反而更溫柔，像靠近妳時，剛好聞到的那一點點甜。'
     ),
     createBubble(
-      'https://developers-resource.landpress.line.me/fx/clip/clip2.jpg',
-      '俐落層次短髮',
-      '輕盈剪裁，凸顯臉部線條， 超好整理又不顯年紀。'
+      'https://line-bot-quickreply.vercel.app/images/2.png',
+      '波波捲 x 水中睡蓮',
+      '像剛洗完澡還沒完全乾的頭髮、溫溫的、水感的香氣。不濃不淡，有點距離感，也有點像熟悉的人身上的氣味。'
     ),
     createBubble(
-      'https://developers-resource.landpress.line.me/fx/clip/clip3.jpg',
-      '氣質鎖骨髮',
-      '不挑臉型、自然捲也OK，氣質與甜美兼具，男女都愛！'
+      'https://line-bot-quickreply.vercel.app/images/3.png',
+      '鬆感捲 x 香草柑橘',
+      '不是刻意捲的完美，而是隨手撥就很自然的那種鬆度。就像下午三點曬太陽的味道，有果香、有一點溫熱的香草味，很舒服。'
     ),
     createBubble(
-      'https://developers-resource.landpress.line.me/fx/clip/clip4.jpg',
-      '韓系空氣瀏海',
-      '減齡神器，修飾額頭，自然蓬鬆、拍照超加分～'
+      'https://line-bot-quickreply.vercel.app/images/4.png',
+      '羽翼層次 x 玫瑰藍',
+      '乾燥玫瑰混著一點墨藍色的情緒，冷冷的，但很好看。這不是那種會討好人的甜，而是自己就很有味道的個性。'
     )
   ]
 };
@@ -137,7 +137,7 @@ function createBubble(imgUrl, title, desc) {
                     { type: 'filler' },
                     {
                       type: 'icon',
-                      url: 'https://developers-resource.landpress.line.me/fx/clip/clip14.png'
+                      url: 'https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png'
                     },
                     {
                       type: 'text',

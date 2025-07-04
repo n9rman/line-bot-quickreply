@@ -57,7 +57,7 @@ function handleEvent(event) {
   if (event.message.text === '髮型介紹') {
     return client.replyMessage(event.replyToken, {
       type: 'flex',
-      altText: '髮型介紹卡片',
+      altText: '韓系髮型',
       contents: carouselMessage
     });
   }
@@ -114,14 +114,14 @@ function createBubble(imgUrl, title, desc) {
               type: 'text',
               text: title,
               size: 'xl',
-              color: '#ffffff',
+              color: '#000000',
               weight: 'bold'
             },
             {
               type: 'text',
               text: desc,
               wrap: true,
-              color: '#FFFFFF',
+              color: '#000000',
               size: 'xxs',
               margin: 'xs'
             },
@@ -155,7 +155,7 @@ function createBubble(imgUrl, title, desc) {
               borderWidth: '1px',
               cornerRadius: '4px',
               spacing: 'sm',
-              borderColor: '#ffffff',
+              borderColor: '#000000',
               margin: 'xxl',
               height: '40px',
               action: {

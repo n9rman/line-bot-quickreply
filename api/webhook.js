@@ -155,7 +155,7 @@ function createBubble(imgUrl, title, desc) {
               borderWidth: '1px',
               cornerRadius: '4px',
               spacing: 'sm',
-              borderColor: '#000000',
+              borderColor: '#FFFFFF',
               margin: 'xxl',
               height: '40px',
               action: {
@@ -179,7 +179,7 @@ function createBubble(imgUrl, title, desc) {
             {
               type: 'text',
               text: 'HOT',
-              color: '#ffffff',
+              color: '#000000',
               align: 'center',
               size: 'xs',
               offsetTop: '3px'
